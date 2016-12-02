@@ -25,11 +25,18 @@ public class OfferDAO {
 	}
 	
 	//querying and returning a single object
-	public Offer getOffer(String name){
-		String sqlStatement = "select * from grade where name=?";
-		return jdbcTemplateObject.queryForObject(sqlStatement, new Object[] { name }, new OfferMapper());
+	public List<Offer> getCreditByTerm(String year, String term){
+		String sqlStatement = "select * from grade where year=? and term = ?";
+		//System.out.println(jdbcTemplateObject.query(sqlStatement, new Object[] { year,term }, new OfferMapper()).toString());
+		return jdbcTemplateObject.query(sqlStatement, new Object[] { year,term }, new OfferMapper());
 	}
-
+	
+	public int getCreditByClassification(String classification){
+		String sqlStatement = "select sum(credit) from grade where classification = ?";
+		System.out.println(jdbcTemplateObject.queryForObject(sqlStatement, new Object[]{classification}, int.class));
+		return jdbcTemplateObject.queryForObject(sqlStatement, new Object[]{classification}, int.class);
+	}
+	
 	// querying and returning a multiple object
 	public List<Offer> getOffers() {
 		String sqlStatement = "select * from grade";
@@ -46,6 +53,7 @@ public class OfferDAO {
 		int credit = offer.getCredit();
 		
 		String sqlStatement = "insert into grade (year,term,code,subject,classification,credit) values(?,?,?,?,?,?)";
+	
 		return (jdbcTemplateObject.update(sqlStatement, new Object[]{year,term,code,subject,classification,credit}) == 1);
 	}
 	

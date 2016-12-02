@@ -19,11 +19,15 @@ public class OffersService {
 	}
 
 	public List<Offer> getCurrent() {
-
-		
 		return offerDAO.getOffers();
 	}
 	
+	public List<Offer> getCBT(String year, String term){
+		return offerDAO.getCreditByTerm(year, term);
+	}
+	public int getCBC(String classification){
+		return offerDAO.getCreditByClassification(classification);
+	}
 	
 	
 }
