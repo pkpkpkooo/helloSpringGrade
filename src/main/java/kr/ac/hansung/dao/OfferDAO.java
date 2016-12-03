@@ -71,7 +71,7 @@ public class OfferDAO {
 		return (jdbcTemplateObject.update(sqlStatement, new Object[]{year,term,code,subject,classification,credit,id}) == 1);
 	}
 	
-	public boolean delete(int year){
+	public boolean deleteByYear(String year){
 		
 		String sqlStatement = "delete from grade where year=?";
 		return (jdbcTemplateObject.update(sqlStatement, new Object[]{year}) == 1);

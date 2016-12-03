@@ -28,6 +28,11 @@ public class OffersService {
 	public int getCBC(String classification){
 		return offerDAO.getCreditByClassification(classification);
 	}
-	
+	public boolean deleteBY(String year){
+		return offerDAO.deleteByYear(year);
+	}
+	public boolean insert(Offer offer){
+		return offerDAO.insert(offer);
+	}
 	
 }
